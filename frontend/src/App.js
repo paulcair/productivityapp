@@ -5,14 +5,6 @@ import TaskItem from './components/TaskItem'
 
 function App() {
   
-  // Get existing tasks from local storage
-  const [existingTasks, setExistingTasks] = useState(JSON.parse(localStorage.getItem('tasks')) ?? [])
-
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(existingTasks))    
-  },[existingTasks])
-
-
   return (
     <>
       <div className = "container mx-auto">
