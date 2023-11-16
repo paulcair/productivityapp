@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/paulcair/productivityapp/static/css/main.ada34d7a.css",
+    "main.js": "/paulcair/productivityapp/static/js/main.9f66d077.js",
+    "static/js/787.9e9f4ffd.chunk.js": "/paulcair/productivityapp/static/js/787.9e9f4ffd.chunk.js",
+    "index.html": "/paulcair/productivityapp/index.html",
+    "main.ada34d7a.css.map": "/paulcair/productivityapp/static/css/main.ada34d7a.css.map",
+    "main.9f66d077.js.map": "/paulcair/productivityapp/static/js/main.9f66d077.js.map",
+    "787.9e9f4ffd.chunk.js.map": "/paulcair/productivityapp/static/js/787.9e9f4ffd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ada34d7a.css",
+    "static/js/main.9f66d077.js"
+  ]
+}
