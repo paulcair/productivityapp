@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-
+import Header from './components/Header'
 
 function App() {
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold underline">Productivity App</h1>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p className="text-2xl font-bold">
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link font-bold"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className = "container mx-auto">
+        <Header />
+        <section className= "heading">
+          <h1 className ="flex items-center justify-center">
+            Welcome to the Productivity App      
+          </h1>
+          <p className ="text-2xl text-center">This app is designed to help you focus on tasks using the pomodoro technique</p>
+        </section>
+      </div>
+    </>
   );
 }
 
