@@ -1,21 +1,14 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 
 
-function TaskForm() {
-    // Get existing tasks from local storage
-    const [existingTasks, setExistingTasks] = useState(JSON.parse(localStorage.getItem('tasks')) ?? [])
+function TaskForm({ addNewTask }) {
+        
     const [newTask, setNewTask] = useState('')
-
-    useEffect(() => {
-        localStorage.setItem('tasks', JSON.stringify(existingTasks))    
-    },[existingTasks])
 
     const onSubmit = (e) => {
         e.preventDefault()
 
-        // Add the new task to the array
-        setExistingTasks([...existingTasks, newTask])
-
+        addNewTask(newTask)
         
         setNewTask('')
     }

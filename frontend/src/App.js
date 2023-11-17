@@ -4,6 +4,16 @@ import TaskForm from'./components/TaskForm'
 import TaskItem from './components/TaskItem'
 
 function App() {
+
+  const [existingTasks, setExistingTasks] = useState(JSON.parse(localStorage.getItem('tasks')) ?? [])
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(existingTasks))    
+  },[existingTasks])
+
+  const addNewTask = (newTask) => {
+    setExistingTasks((prevTasks) => [...prevTasks, newTask])
+  }
   
   return (
     <>
@@ -28,7 +38,7 @@ function App() {
               <TaskItem key={index} task = {task} />
             ))}
           </div>
-          <TaskForm />
+          <TaskForm addNewTask={addNewTask}/>
         </section>
       </div>
     </>
