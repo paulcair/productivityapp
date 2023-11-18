@@ -14,10 +14,10 @@ function TaskItem({task, index, onTaskChange}) {
     console.log(index)
     console.log(task)
     // Retrieve existing tasks from local storage
-    const existingTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const existingTasks = JSON.parse(localStorage.getItem('tasks')) || []
 
     // Remove the task from the array based on its index
-    const updatedTasks = [...existingTasks.slice(0, index), ...existingTasks.slice(index + 1)];
+    const updatedTasks = [...existingTasks.slice(0, index), ...existingTasks.slice(index + 1)]
 
     // Pass the updated tasks back to App.js
     onTaskChange(updatedTasks)

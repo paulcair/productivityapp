@@ -16,6 +16,11 @@ code {
     monospace;
 }
 
+.background-gray {
+  background-color: rgba(221,221,221,0.1); /* Set your desired background color */
+  padding: 10px; /* Add padding for better appearance */
+}
+
 
 /* Header for top */
 .header {
@@ -84,10 +89,46 @@ code {
   font-family: inherit;
 }
 
+.form-group input[type="number"].time-input{
+  width: calc(100% - 22px); /* Adjust the width to leave space for the arrows */
+  padding: 10px;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  font-family: inherit;
+  display: inline-block; /* Align the input and arrows horizontally */
+}
+
+/* Styling for the up and down arrows */
+.form-group input[type="number"].time-input::-webkit-time-up,
+.form-group input[type="number"].time-input::-webkit-time-down {
+  -webkit-appearance: none; /* Remove default appearance */
+  margin: 0; /* Remove the margin to avoid overlapping with the input */
+}
+
+
+
 .form-group label {
   text-align: left;
   display: block;
   margin: 0 0 5px 3px;
+}
+
+/* Task list */
+.task-list ul li:hover {
+  background-color: rgba(221,221,221,0.1);
+  color: #555;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  
+}
+
+
+.task-list ol li:hover {
+  background-color: rgba(221,221,221,0.1);
+  color: #555;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  
 }
 
 /* button */

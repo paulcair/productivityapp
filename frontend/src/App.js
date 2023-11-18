@@ -1,22 +1,29 @@
 import {useState, useEffect} from 'react'
 import Header from './components/Header'
+import FocusSessionForm from './components/FocusSessionForm'
 import TaskForm from'./components/TaskForm'
 import TaskItem from './components/TaskItem'
 
 function App() {
 
   const [existingTasks, setExistingTasks] = useState(JSON.parse(localStorage.getItem('tasks')) ?? [])
+  const [priorities, setPriorities] = useState(JSON.parse(localStorage.getItem('priorities')) ?? [])
 
   const addNewTask = (newTask) => {
     setExistingTasks((prevTasks) => [...prevTasks, newTask])
   }
 
   const handleTaskChange = (updatedTasks) => {
-    setExistingTasks(updatedTasks);
+    setExistingTasks(updatedTasks)
     
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks));   
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks))  
   }
-  
+
+  const updatePriorities = (updatedPriorities) => {
+    setPriorities(updatedPriorities)
+
+    localStorage.setItem('priorities', JSON.stringify(updatedPriorities)) 
+  }
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(existingTasks))   
@@ -38,11 +45,12 @@ function App() {
         </section>
         {/* Timer section */}
         <section className="form shadow-md p-4">
-          <h1 className="text-center text-2xl font-bold pb-4">Focus Session Timer</h1>
+          <h1 className="text-center text-2xl font-bold pb-4 border-b">Focus Session Objectives</h1>
+           <FocusSessionForm existingTasks = {existingTasks} existingPriorities = {priorities} updatePriorities={updatePriorities}/>
         </section>
         {/* Tasks Form and Items section */}
         <section className="form shadow-md p-4">
-          <h1 className="text-center text-2xl font-bold pb-4 border-b">Tasks for this Focus Session</h1>
+          <h1 className="text-center text-2xl font-bold pb-4 border-b">All Tasks</h1>
           <div className = "w-full pb-4">
             {existingTasks.map((task, index)=>(
               <TaskItem key={index} task = {task} index={index} onTaskChange={handleTaskChange}/>
