@@ -7,14 +7,24 @@ function App() {
 
   const [existingTasks, setExistingTasks] = useState(JSON.parse(localStorage.getItem('tasks')) ?? [])
 
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(existingTasks))    
-  },[existingTasks])
-
   const addNewTask = (newTask) => {
     setExistingTasks((prevTasks) => [...prevTasks, newTask])
   }
+
+  const handleTaskChange = (updatedTasks) => {
+    setExistingTasks(updatedTasks);
+    
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));   
+  }
   
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(existingTasks))   
+    
+  },[existingTasks])
+
+ 
+
   return (
     <>
       <div className = "container mx-auto">
@@ -35,7 +45,7 @@ function App() {
           <h1 className="text-center text-2xl font-bold pb-4 border-b">Tasks for this Focus Session</h1>
           <div className = "w-full pb-4">
             {existingTasks.map((task, index)=>(
-              <TaskItem key={index} task = {task} />
+              <TaskItem key={index} task = {task} index={index} onTaskChange={handleTaskChange}/>
             ))}
           </div>
           <TaskForm addNewTask={addNewTask}/>

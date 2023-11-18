@@ -125,6 +125,68 @@ code {
   transform: scale(0.98);
 }
 
+.checkbox-small {
+  height: 16px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.delete-icon {
+  height: 16px;
+  font-size: 25px;
+  color: #888;
+  transition: color 0.3s ease-in-out;
+}
+
+.tooltip {
+  position: absolute;
+  background-color: #f0f0f052;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 4px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ddd;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+
+.delete-button:hover .delete-icon {
+  color: #131212;
+}
+
+.delete-button:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.delete-button:hover .circle {
+  opacity: 0.5;
+}
+
+
 /* TailwindCSS */
 @tailwind base;
 @tailwind components;
