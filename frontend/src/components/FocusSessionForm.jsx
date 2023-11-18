@@ -1,8 +1,14 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
+import pomodoroCalculator from '../features/pomodoroCalculator'
 
 function FocusSessionForm({ existingTasks, existingPriorities,updatePriorities}) {
 
     const [focusSessionLength, setFocusSessionLength] = useState()
+    const [focusSessionDetails, setFocusSessionDetails] = useState({pomodoros:[],breaks:[]})
+
+    useEffect(()=> {
+
+    },[focusSessionDetails])
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -17,15 +23,15 @@ function FocusSessionForm({ existingTasks, existingPriorities,updatePriorities})
         } else {
             // Handle invalid input, e.g., non-numeric characters
             setFocusSessionLength()
-        }        
+        }     
+        
+        setFocusSessionDetails(pomodoroCalculator(inputValue))
     }
 
     const selectPriority = (task) => {
         
         const updatedPriorities = [...existingPriorities, task]
-
-        console.log(updatedPriorities)
-        
+      
         updatePriorities(updatedPriorities)       
 
     }
@@ -33,17 +39,15 @@ function FocusSessionForm({ existingTasks, existingPriorities,updatePriorities})
     const deselectPriority = (index) => {
         
         const updatedPriorities = [...existingPriorities.slice(0, index), ...existingPriorities.slice(index + 1)]
-
-        console.log(updatedPriorities)
-        
+       
         updatePriorities(updatedPriorities)       
 
     }
 
   return (
     <form onSubmit={onSubmit}>
-        <h1 className="text-xl pt-4 pb-4 border-b">Set Focus Session Duration</h1>
-        <div className="form-group border-b border-gray-300">
+        <h1 className="text-xl pt-4 pb-4">Set Focus Session Duration</h1>
+        <div className="form-group">
             <div className="pt-4 pb-4 flex items-center border-b border-gray-300">
                 <label htmlFor="duration">Minutes (multiple of 5):</label>
                 <input 
@@ -57,6 +61,23 @@ function FocusSessionForm({ existingTasks, existingPriorities,updatePriorities})
                 className ="ml-4 time-input"
                 />
             </div>
+            {focusSessionDetails.pomodoros.length === 0 ? (
+            <></>
+            ) : (
+                <>
+                    {focusSessionDetails.pomodoros.length === 1 ? (
+                        <p className='mt-4 font-bold text-xl'>You will have {focusSessionDetails.pomodoros.length}x {focusSessionDetails.pomodoros[0]}-minute focus period</p>
+                    ):(
+                        <>
+                       {focusSessionDetails.pomodoros[0] === focusSessionDetails.pomodoros[1] ? (
+                        <p className='mt-4 font-bold text-xl'>You will have {focusSessionDetails.pomodoros?.length}x {focusSessionDetails.pomodoros[0]}-minute focus periods with {focusSessionDetails.breaks?.length}x {focusSessionDetails.breaks[0]}-minute break(s) </p>
+                    ):(
+                    <></>
+                    )}
+                </>
+                )}
+                </>
+            )}
             <h1 className="text-xl pt-4">Select Focus Session Priorities</h1>
             <div className="task-list pt-4 pb-4 border-b border-gray-300">
                 <ul className="list-disc ml-4 mr-4 pb-4 border-t border-gray-300" >
@@ -84,7 +105,7 @@ function FocusSessionForm({ existingTasks, existingPriorities,updatePriorities})
                     </ol>
                 </div>
                 </>)}
-            <button className="btn btn-block bg-black mt-4" type="submit">Start Focus Session</button>
+            <button className="btn btn-block bg-black mt-8" type="submit">Start Focus Session</button>
         </div>
     </form>
   )
