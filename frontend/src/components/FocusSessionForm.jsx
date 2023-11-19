@@ -18,11 +18,8 @@ function FocusSessionForm({ existingTasks, existingPriorities,updatePriorities})
         const inputValue = parseInt(e.target.value)
 
         if (!isNaN(inputValue)) {
-            // const roundedValue = Math.max(5, Math.round(inputValue / 5) * 5)
-            // setFocusSessionLength(Math.max(0, roundedValue))
             setFocusSessionLength(Math.max(0, inputValue))
         } else {
-            // Handle invalid input, e.g., non-numeric characters
             setFocusSessionLength()
         }     
         
@@ -49,49 +46,58 @@ function FocusSessionForm({ existingTasks, existingPriorities,updatePriorities})
     <form onSubmit={onSubmit}>
         <h1 className="text-xl pt-4 pb-4">Set Focus Session Duration</h1>
         <div className="form-group">
-            <div className="pt-4 pb-4 flex items-center border-b border-gray-300">
-                <label htmlFor="duration">Minutes (multiple of 5):</label>
+            <div className="pt-4 pb-4 flex items-center ">
+                <label htmlFor="duration">Minutes:</label>
                 <input 
                 type="number" 
                 name='time' 
                 id='time' 
                 value={focusSessionLength}
-                step = '5'
+                step = '1'
                 min = '0'
                 onChange={handleTimeInput}
                 className ="ml-4 time-input"
                 />
             </div>
-            {focusSessionDetails.pomodoros.length === 0 ? (
-            <></>
-            ) : (
-                <>
-                    {focusSessionDetails.pomodoros.length === 1 ? (
-                        <p className='mt-4 font-bold text-xl'>You will have {focusSessionDetails.pomodoros.length}x {focusSessionDetails.pomodoros[0]}-minute focus period</p>
-                    ):(
-                        <>
-                       {focusSessionDetails.pomodoros[0] === focusSessionDetails.pomodoros[1] ? (
-                        <p className='mt-4 font-bold text-xl'>You will have {focusSessionDetails.pomodoros?.length}x {focusSessionDetails.pomodoros[0]}-minute focus periods with {focusSessionDetails.breaks?.length}x {focusSessionDetails.breaks[0]}-minute break(s) </p>
-                    ):(
+            {focusSessionDetails.pomodoros.length === 0 ? 
+                (
                     <></>
-                    )}
+                ) : (
+                    <>
+                        <div className="task-list pt-4 pb-4 border-b border-gray-300">
+                            <ul className="list-disc ml-4 mr-4 pb-4 border-t border-gray-300" >
+                                {focusSessionDetails.pomodoros.map((_, index)=> (
+                                    <li className='pt-2 pb-2 pl-2 border-b border-gray-300 flex items-center"'>
+                                        <span className="font-bold">
+                                        Focus Period {index +1 }: 
+                                        </span>
+                                        <span className="ml-2"> {focusSessionDetails.pomodoros[index]} minutes {focusSessionDetails.breaks[index] ? `, followed by a ${focusSessionDetails.breaks[index]} break.`: ''}
+                                        </span>
+                                    </li>
+                                ))}
+                                </ul>
+                        </div>
+                    </>
+                )
+            }
+            {existingTasks.length === 0 ? (<></>) : (
+                <>
+                    <h1 className="text-xl pt-4">Select Focus Session Priorities</h1>
+                    <div className="task-list pt-4 pb-4 ">
+                        <ul className="list-disc ml-4 mr-4 pb-4 border-t border-gray-300" >
+                            {existingTasks.map((task, index)=> (
+                                <li key = {index} onClick = {() => selectPriority(task)} className='pt-2 pb-2 pl-2 border-b border-gray-300 flex items-center"'>
+                                    {task}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </>
-                )}
-                </>
-            )}
-            <h1 className="text-xl pt-4">Select Focus Session Priorities</h1>
-            <div className="task-list pt-4 pb-4 border-b border-gray-300">
-                <ul className="list-disc ml-4 mr-4 pb-4 border-t border-gray-300" >
-                    {existingTasks.map((task, index)=> (
-                        <li key = {index} onClick = {() => selectPriority(task)} className='pt-2 pb-2 pl-2 border-b border-gray-300 flex items-center"'>
-                            {task}
-                        </li>
-                    ))}
-                </ul>
-            </div>
+                )
+            }
             {existingPriorities.length === 0 ? (<></>) : (
                 <>
-                <div className="task-list pt-4 pb-4 border-b border-gray-300">
+                <div className="task-list pt-4 pb-4 border-t border-gray-300">
                     <ol className="list-disc ml-4 mr-4 border border-gray-300 background-gray" >
                         {existingPriorities.map((task, index)=> (
                             <li key = {index} onClick = {() => deselectPriority(index)} className='pt-2 pb-2 pl-2 flex items-center"'>
