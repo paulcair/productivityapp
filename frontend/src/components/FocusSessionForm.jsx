@@ -18,8 +18,8 @@ function FocusSessionForm({ existingTasks, existingPriorities,updatePriorities})
         const inputValue = parseInt(e.target.value)
 
         if (!isNaN(inputValue)) {
-          
-            setFocusSessionLength(Math.max(0, inputValue))
+            const roundedValue = Math.max(5, Math.round(inputValue / 5) * 5)
+            setFocusSessionLength(Math.max(0, roundedValue))
         } else {
             // Handle invalid input, e.g., non-numeric characters
             setFocusSessionLength()
@@ -57,7 +57,7 @@ function FocusSessionForm({ existingTasks, existingPriorities,updatePriorities})
                 value={focusSessionLength}
                 step = '5'
                 min = '0'
-                onChange={handleTimeInput}
+                onSubmit={handleTimeInput}
                 className ="ml-4 time-input"
                 />
             </div>
