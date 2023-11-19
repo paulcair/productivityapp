@@ -18,8 +18,8 @@ function FocusSessionForm({ existingTasks, existingPriorities,updatePriorities})
         const inputValue = parseInt(e.target.value)
 
         if (!isNaN(inputValue)) {
-            const roundedValue = Math.max(5, Math.round(inputValue / 5) * 5)
-            setFocusSessionLength(Math.max(0, roundedValue))
+          
+            setFocusSessionLength(Math.max(0, inputValue))
         } else {
             // Handle invalid input, e.g., non-numeric characters
             setFocusSessionLength()
