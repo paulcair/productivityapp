@@ -1,7 +1,8 @@
 import {useState, useEffect} from 'react'
+import {toast} from 'react-toastify'
 import pomodoroCalculator from '../features/pomodoroCalculator'
 
-function FocusSessionForm({ existingTasks, existingPriorities,updatePriorities}) {
+function FocusSessionForm({ existingTasks, existingPriorities,updatePriorities, toggleFocusSession}) {
 
     const [focusSessionLength, setFocusSessionLength] = useState()
     const [focusSessionDetails, setFocusSessionDetails] = useState({pomodoros:[],breaks:[]})
@@ -12,6 +13,18 @@ function FocusSessionForm({ existingTasks, existingPriorities,updatePriorities})
 
     const onSubmit = (e) => {
         e.preventDefault()
+
+        if(focusSessionDetails.pomodoros.length === 0){
+            console.log('no time set')
+            toast.error('Please set a focus session time')
+
+        }else{
+            localStorage.setItem('focusSessionDetails', 
+            JSON.stringify(focusSessionDetails))
+            toggleFocusSession()
+
+        }
+        
     }
 
     const handleTimeInput = (e) => {
