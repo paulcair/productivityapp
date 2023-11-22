@@ -11,7 +11,7 @@ function Timer({ initialTime, onTimerEnd }) {
     }
 
     useEffect(()=>{
-        setTime(initialTime)
+        setTime(initialTime*60)
     },[initialTime])
 
 
