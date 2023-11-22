@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import alarmSound from './alarm.mp3'
 
 function Timer({ initialTime, onTimerEnd }) {
-    const [time, setTime] = useState(initialTime)
+    const [time, setTime] = useState(initialTime*60)
     const [isPaused, setIsPaused] = useState(false);
 
     const playAlarm = () => {

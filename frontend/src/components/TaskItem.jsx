@@ -11,8 +11,6 @@ function TaskItem({task, index, onTaskChange}) {
   const handleDeleteClick = () => {
     
     console.log('Delete button Clicked')
-    console.log(index)
-    console.log(task)
     // Retrieve existing tasks from local storage
     const existingTasks = JSON.parse(localStorage.getItem('tasks')) || []
 
