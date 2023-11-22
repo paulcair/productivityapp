@@ -15,7 +15,6 @@ function FocusSessionForm({ existingTasks, existingPriorities,updatePriorities, 
         e.preventDefault()
 
         if(focusSessionDetails.pomodoros.length === 0){
-            console.log('no time set')
             toast.error('Please set a focus session time')
 
         }else{

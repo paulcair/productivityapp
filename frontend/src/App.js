@@ -5,15 +5,26 @@ import Header from './components/Header'
 import FocusSessionForm from './components/FocusSessionForm'
 import TaskForm from'./components/TaskForm'
 import TaskItem from './components/TaskItem'
+import Timer from './components/Timer'
 
 function App() {
 
   const [existingTasks, setExistingTasks] = useState(JSON.parse(localStorage.getItem('tasks')) ?? [])
   const [priorities, setPriorities] = useState(JSON.parse(localStorage.getItem('priorities')) ?? [])
   const [isFocusSessionStarted, setIsFocusSessionStarted] = useState(false)
+  const [focusSessionDetails, setFocusSessionDetails] = useState(JSON.parse(localStorage.getItem('focusSessionDetails')) ?? {})
+  const [pomodorosIndex, setPomodorosIndex] = useState(0)
+  const [breaksIndex, setBreaksIndex] = useState(0)
 
   const toggleFocusSession = () => {
+    setFocusSessionDetails(JSON.parse(localStorage.getItem('focusSessionDetails')) ?? {})
     setIsFocusSessionStarted(!isFocusSessionStarted)
+    setPomodorosIndex(0)
+    setBreaksIndex(0)
+
+    console.log(pomodorosIndex)
+    console.log(breaksIndex)
+    console.log(focusSessionDetails.pomodoros.length)
   }
   
   const addNewTask = (newTask) => {
@@ -32,8 +43,20 @@ function App() {
     localStorage.setItem('priorities', JSON.stringify(updatedPriorities)) 
   }
 
+  const handleTimerEnd = () => {    
+    if(pomodorosIndex > focusSessionDetails.pomodoros.length){
+      console.log('case 1')
+    } else if(pomodorosIndex===breaksIndex) {
+      console.log('case 2')
+      setPomodorosIndex(pomodorosIndex+1)
+    } else{
+      console.log('case 3')
+      setBreaksIndex(breaksIndex+1)
+    }
+  }
+
   useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(existingTasks))   
+    localStorage.setItem('tasks', JSON.stringify(existingTasks))  
     
   },[existingTasks])
 
@@ -52,8 +75,28 @@ function App() {
         </section>
         {isFocusSessionStarted ? (
           <>
-            <h1>Focus Session Started</h1>
-            <button className="btn btn-block" onClick ={toggleFocusSession}>Stop Focus Session</button>
+            <section className="form shadow-md p-4">
+              {pomodorosIndex===breaksIndex ? (
+                <>
+                  <h1 className="text-center text-3xl font-bold underline">
+                    Focus Period {pomodorosIndex+1}
+                  </h1>
+                  <Timer initialTime={focusSessionDetails.pomodoros[pomodorosIndex]} onTimerEnd={handleTimerEnd} />
+                </>
+                ) : (
+                <>
+                  <h1 className="text-center text-3xl font-bold underline">
+                    Break {breaksIndex+1}
+                  </h1>
+                  <Timer initialTime={focusSessionDetails.pomodoros[pomodorosIndex]} onTimerEnd={handleTimerEnd} />
+                </>
+              )}
+              <h2 className="text-center text-2xl mb-4">
+                <span className="font-bold">Task: </span>
+                <span>{priorities[0]}</span>
+              </h2>
+              <button className="btn btn-block" onClick ={toggleFocusSession}>Stop Focus Session</button>
+            </section>
           </>
         ) : (
           <>
