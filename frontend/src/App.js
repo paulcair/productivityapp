@@ -21,10 +21,6 @@ function App() {
     setIsFocusSessionStarted(!isFocusSessionStarted)
     setPomodorosIndex(0)
     setBreaksIndex(0)
-
-    console.log(pomodorosIndex)
-    console.log(breaksIndex)
-    console.log(focusSessionDetails.pomodoros.length)
   }
   
   const addNewTask = (newTask) => {
@@ -44,15 +40,20 @@ function App() {
   }
 
   const handleTimerEnd = () => {    
-    if(pomodorosIndex > focusSessionDetails.pomodoros.length){
-      console.log('case 1')
+    if(pomodorosIndex >= focusSessionDetails.pomodoros.length){
+      toggleFocusSession()
     } else if(pomodorosIndex===breaksIndex) {
-      console.log('case 2')
       setPomodorosIndex(pomodorosIndex+1)
     } else{
-      console.log('case 3')
       setBreaksIndex(breaksIndex+1)
     }
+  }
+
+  const handleCompleteClick = () => {
+    
+   const updatedPriorities = [...priorities.slice(0, 0), ...priorities.slice(1)]
+
+    updatePriorities(updatedPriorities)
   }
 
   useEffect(() => {
@@ -88,13 +89,18 @@ function App() {
                   <h1 className="text-center text-3xl font-bold underline">
                     Break {breaksIndex+1}
                   </h1>
-                  <Timer initialTime={focusSessionDetails.pomodoros[pomodorosIndex]} onTimerEnd={handleTimerEnd} />
+                  <Timer initialTime={focusSessionDetails.breaks[breaksIndex]} onTimerEnd={handleTimerEnd} />
                 </>
               )}
-              <h2 className="text-center text-2xl mb-4">
-                <span className="font-bold">Task: </span>
-                <span>{priorities[0]}</span>
-              </h2>
+              <div className='justify-center border border-gray-300 background-gray mb-5'>
+                <h2 className="text-center text-2xl pb-2 pt-5">
+                  <span className="font-bold">Task: </span>
+                  <span>{priorities[0]}</span>
+                </h2>
+                <div className='flex justify-center'>
+                  <button className="btn mt-5 mb-2" onClick={handleCompleteClick}>Task Completed</button>
+                </div>
+              </div>
               <button className="btn btn-block" onClick ={toggleFocusSession}>Stop Focus Session</button>
             </section>
           </>
