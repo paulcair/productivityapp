@@ -42,6 +42,7 @@ function App() {
   const handleTimerEnd = () => {    
     if(pomodorosIndex >= focusSessionDetails.pomodoros.length){
       toggleFocusSession()
+      localStorage.clearItem('focusSessionDetails')
     } else if(pomodorosIndex===breaksIndex) {
       setPomodorosIndex(pomodorosIndex+1)
     } else{
@@ -51,10 +52,34 @@ function App() {
 
   const handleCompleteClick = () => {
     
-   const updatedPriorities = [...priorities.slice(0, 0), ...priorities.slice(1)]
+    // Strike out the task in the existingTasks array
+    const index = existingTasks.findIndex((task) => task.task === priorities[0])
 
-    updatePriorities(updatedPriorities)
+    const updatedTask = {task: priorities[0], completed: true}
+
+    const updatedTasks = [
+      ...existingTasks.slice(0, index),
+      updatedTask,
+      ...existingTasks.slice(index + 1),
+    ]
+
+    handleTaskChange(updatedTasks)
+
+    // Update the priorities array by removing the top priority
+   const updatedPriorities = [...priorities.slice(0, 0), ...priorities.slice(1)]
+   updatePriorities(updatedPriorities)
   }
+
+  const handleClearAll = () => {
+
+    localStorage.removeItem('tasks')
+    setExistingTasks(JSON.parse(localStorage.getItem('tasks')) ?? [])
+
+    localStorage.removeItem('priorities')
+    setPriorities(JSON.parse(localStorage.getItem('priorities')) ?? [])
+
+  }
+
 
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(existingTasks))  
@@ -116,12 +141,24 @@ function App() {
             </section>
             {/* Tasks Form and Items section */}
             <section className="form shadow-md p-4">
-              <h1 className="text-center text-2xl font-bold pb-4 border-b">All Tasks</h1>
-              <div className = "w-full pb-4">
-                {existingTasks.map((task, index)=>(
-                  <TaskItem key={index} task = {task} index={index} onTaskChange={handleTaskChange}/>
-                ))}
-              </div>
+              <h1 className="text-center text-2xl font-bold pb-4">All Tasks</h1>
+              {existingTasks.length === 0 ? (<></>): (
+                <>
+                  <div className = "w-full pb-4 border-t">
+                    {existingTasks.map((task, index)=>(
+                      <TaskItem key={task.task} task = {task.task} completed = {task.completed} index={index} onTaskChange={handleTaskChange}/>
+                    ))}
+                  </div>
+                  <div className="flex justify-end mt-2 mb-2">
+                      <button 
+                        className ="btn"
+                        onClick = {handleClearAll}
+                      >
+                        Clear All
+                      </button>
+                  </div>
+                </>
+                )}
               <TaskForm addNewTask={addNewTask}/>
             </section>
           </>

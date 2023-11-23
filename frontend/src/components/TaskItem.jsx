@@ -1,16 +1,27 @@
 import {useState} from 'react'
 import DeleteButton from './DeleteButton'
 
-function TaskItem({task, index, onTaskChange}) {
-  const [isChecked, setIsChecked] = useState(false)
+function TaskItem({task, completed, index, onTaskChange}) {
+  const [isChecked, setIsChecked] = useState(completed)
 
   const handleCheckBoxChange = () => {
     setIsChecked(!isChecked)
+    
+    const updatedTask = {task, completed: !isChecked}
+
+    const existingTasks = JSON.parse(localStorage.getItem('tasks')) || []
+
+    const updatedTasks = [
+      ...existingTasks.slice(0, index),
+      updatedTask,
+      ...existingTasks.slice(index + 1),
+    ]
+
+    onTaskChange(updatedTasks)
   }
 
   const handleDeleteClick = () => {
-    
-    console.log('Delete button Clicked')
+  
     // Retrieve existing tasks from local storage
     const existingTasks = JSON.parse(localStorage.getItem('tasks')) || []
 
@@ -33,7 +44,7 @@ function TaskItem({task, index, onTaskChange}) {
           className='mr-2 mt-2 checkbox-small'
         />
         <p
-          className={`text-lg ${isChecked ? 'line-through text-gray-500':''} ml-4`}
+          className={`text-lg ${completed===true ? 'line-through text-gray-500':''} ml-4`}
         >
           {task}
         </p>

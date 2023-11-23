@@ -98,8 +98,8 @@ function FocusSessionForm({ existingTasks, existingPriorities,updatePriorities, 
                     <div className="task-list pt-4 pb-4 ">
                         <ul className="list-disc ml-4 mr-4 pb-4 border-t border-gray-300" >
                             {existingTasks.map((task, index)=> (
-                                <li key = {index} onClick = {() => selectPriority(task)} className='pt-2 pb-2 pl-2 border-b border-gray-300 flex items-center"'>
-                                    {task}
+                                <li key = {index} onClick = {() => selectPriority(task.task)} className='pt-2 pb-2 pl-2 border-b border-gray-300 flex items-center"'>
+                                    {task.task}
                                 </li>
                             ))}
                         </ul>

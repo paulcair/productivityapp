@@ -8,7 +8,9 @@ function TaskForm({ addNewTask }) {
     const onSubmit = (e) => {
         e.preventDefault()
 
-        addNewTask(newTask)
+        const taskToAdd = {task:newTask, completed:false}
+
+        addNewTask(taskToAdd)
         
         setNewTask('')
     }
