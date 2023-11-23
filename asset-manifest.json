@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/productivityapp/static/css/main.d63a9f72.css",
-    "main.js": "/productivityapp/static/js/main.8d6a6eab.js",
+    "main.css": "/productivityapp/static/css/main.6942929a.css",
+    "main.js": "/productivityapp/static/js/main.885da8db.js",
     "static/js/787.9e9f4ffd.chunk.js": "/productivityapp/static/js/787.9e9f4ffd.chunk.js",
     "static/media/alarm.mp3": "/productivityapp/static/media/alarm.76020b8d2a09ee450a91.mp3",
     "index.html": "/productivityapp/index.html",
-    "main.d63a9f72.css.map": "/productivityapp/static/css/main.d63a9f72.css.map",
-    "main.8d6a6eab.js.map": "/productivityapp/static/js/main.8d6a6eab.js.map",
+    "main.6942929a.css.map": "/productivityapp/static/css/main.6942929a.css.map",
+    "main.885da8db.js.map": "/productivityapp/static/js/main.885da8db.js.map",
     "787.9e9f4ffd.chunk.js.map": "/productivityapp/static/js/787.9e9f4ffd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d63a9f72.css",
-    "static/js/main.8d6a6eab.js"
+    "static/css/main.6942929a.css",
+    "static/js/main.885da8db.js"
   ]
 }
