@@ -126,6 +126,19 @@ function App() {
                   <button className="btn mt-5 mb-2" onClick={handleCompleteClick}>Task Completed</button>
                 </div>
               </div>
+              <div className="task-list pt-4 pb-4 border-b border-gray-300">
+                <ul className="list-disc ml-4 mr-4 pb-4 border-t border-gray-300" >
+                    {focusSessionDetails.pomodoros.map((_, index)=> (
+                        <li className='pt-2 pb-2 pl-2 border-b border-gray-300 flex items-center"'>
+                            <span className="font-bold">
+                            Focus Period {index +1 }: 
+                            </span>
+                            <span className= {index===pomodorosIndex ? "ml-2 font-bold":"ml-2"}> {focusSessionDetails.pomodoros[index]} minutes {focusSessionDetails.breaks[index] ? `, followed by a ${focusSessionDetails.breaks[index]} break.`: ''}
+                            </span>
+                        </li>
+                    ))}
+                    </ul>
+                </div>
               <button className="btn btn-block" onClick ={toggleFocusSession}>Stop Focus Session</button>
             </section>
           </>
