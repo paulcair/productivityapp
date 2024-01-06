@@ -151,6 +151,7 @@ function App() {
                 existingTasks = {existingTasks} existingPriorities = {priorities} updatePriorities={updatePriorities}
                 toggleFocusSession={toggleFocusSession}
               />
+              <TaskForm addNewTask={addNewTask}/>
             </section>
             {/* Tasks Form and Items section */}
             <section className="form shadow-md p-4">
@@ -172,7 +173,6 @@ function App() {
                   </div>
                 </>
                 )}
-              <TaskForm addNewTask={addNewTask}/>
             </section>
           </>
         )}
