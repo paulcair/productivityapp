@@ -147,11 +147,12 @@ function App() {
             {/* Focus Session Form section */}
             <section className="form shadow-md p-4">
               <h1 className="text-center text-2xl font-bold pb-4 border-b">Focus Session Objectives</h1>
+              <TaskForm addNewTask={addNewTask}/>
               <FocusSessionForm 
                 existingTasks = {existingTasks} existingPriorities = {priorities} updatePriorities={updatePriorities}
                 toggleFocusSession={toggleFocusSession}
               />
-              <TaskForm addNewTask={addNewTask}/>
+
             </section>
             {/* Tasks Form and Items section */}
             <section className="form shadow-md p-4">
