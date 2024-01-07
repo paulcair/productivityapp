@@ -42,7 +42,7 @@ function App() {
   const handleTimerEnd = () => {    
     if(pomodorosIndex >= focusSessionDetails.pomodoros.length){
       toggleFocusSession()
-      localStorage.clearItem('focusSessionDetails')
+      localStorage.removeItem('focusSessionDetails')
     } else if(pomodorosIndex===breaksIndex) {
       setPomodorosIndex(pomodorosIndex+1)
     } else{
@@ -84,7 +84,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(existingTasks))  
     
-  },[existingTasks])
+  },[existingTasks,isFocusSessionStarted])
 
  
 
@@ -146,13 +146,13 @@ function App() {
           <>
             {/* Focus Session Form section */}
             <section className="form shadow-md p-4">
-              <h1 className="text-center text-2xl font-bold pb-4 border-b">Focus Session Objectives</h1>
-              <TaskForm addNewTask={addNewTask}/>
+              <h1 className="text-center text-2xl font-bold pb-4 border-b">Focus Session Details</h1>
               <FocusSessionForm 
                 existingTasks = {existingTasks} existingPriorities = {priorities} updatePriorities={updatePriorities}
                 toggleFocusSession={toggleFocusSession}
               />
-
+              <h1 className="text-center text-2xl font-bold pb-4 border-b">Add Tasks</h1>
+               <TaskForm addNewTask={addNewTask}/>
             </section>
             {/* Tasks Form and Items section */}
             <section className="form shadow-md p-4">
